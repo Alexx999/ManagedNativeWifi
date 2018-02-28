@@ -119,6 +119,8 @@ namespace ManagedNativeWifi
 		/// </summary>
 		public IEnumerable<InterfaceInfo> EnumerateInterfaces() =>
 			NativeWifi.EnumerateInterfaces(_client);
+		public IEnumerable<InterfaceInfoEx> EnumerateInterfacesEx() =>
+			NativeWifi.EnumerateInterfacesEx(_client);
 
 		/// <summary>
 		/// Asynchronously requests wireless interfaces to scan wireless LANs.

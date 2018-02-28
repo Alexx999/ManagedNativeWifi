@@ -38,6 +38,21 @@ namespace ManagedNativeWifi
 			}
 		}
 
+		internal static IEnumerable<InterfaceInfoEx> EnumerateInterfacesEx(Base.WlanClient client)
+		{
+			using (var container = new DisposableContainer<Base.WlanClient>(client))
+			{
+				var interfaceInfoList = Base.GetInterfaceInfoList(container.Content.Handle);
+
+				foreach (var interfaceInfo in interfaceInfoList)
+				{
+					var connection = Base.GetConnectionAttributes(container.Content.Handle, interfaceInfo.InterfaceGuid);
+
+					yield return new InterfaceInfoEx(interfaceInfo, connection);
+				}
+			}
+		}
+
 		#endregion
 
 		#region Scan networks
